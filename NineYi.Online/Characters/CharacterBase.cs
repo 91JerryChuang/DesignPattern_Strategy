@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Net;
 using NineYi.Online.Enums;
+using NineYi.Online.Utilities;
 
 namespace NineYi.Online.Characters
 {
@@ -11,13 +14,16 @@ namespace NineYi.Online.Characters
 
         private int _mp;
 
+        private readonly CharacterEnum _characterType;
+
         public CharacterBase(string name, CharacterEnum characterType)
         {
             this._name = name;
-            this.InitialCharacterInfo(characterType);
+            this._characterType = characterType;
+            this.InitialCharacterInfo();
         }
 
-        private void InitialCharacterInfo(CharacterEnum characterType)
+        private void InitialCharacterInfo()
         {
             var random = new Random();
             var minHp = 0;
@@ -25,7 +31,7 @@ namespace NineYi.Online.Characters
             var minMp = 0;
             var maxMp = 0;
             
-            switch(characterType)
+            switch(this._characterType)
             {
                 case CharacterEnum.Elf:
                     minHp = 25;
@@ -64,24 +70,35 @@ namespace NineYi.Online.Characters
 
         public void Fight(WeaponEnum weapon)
         {
-            switch (weapon)
+            if (weapon == WeaponEnum.Knife)
             {
-                case WeaponEnum.Knife:
-                    Console.WriteLine($"{this._name} 匕首刺擊");
-                    break;
-                case WeaponEnum.Sword:
-                    Console.WriteLine($"{this._name} 揮舞長劍");
-                    break;
-                case WeaponEnum.Bow:
-                    Console.WriteLine($"{this._name} 拉弓射箭");
-                    break;
-                case WeaponEnum.Staff:
-                    Console.WriteLine($"{this._name} 揮舞魔杖");
-                    break;
-                default:
-                    Console.WriteLine($"{this._name} 揮拳");
-                    break;
+                Console.WriteLine($"{this._name} 匕首刺擊");
+                return;
             }
+            else if (weapon == WeaponEnum.Sword)
+            {
+                Console.WriteLine($"{this._name} 揮舞長劍");
+                return;
+            }
+            else if (weapon == WeaponEnum.Bow)
+            {
+                Console.WriteLine($"{this._name} 拉弓射箭");
+                return;
+            }
+            else if (weapon == WeaponEnum.Staff)
+            {
+                if (this._characterType == CharacterEnum.Wizard)
+                {
+                    Console.WriteLine($"{this._name} 揮舞魔杖");
+                    return;
+                }
+            }
+
+            var characterTypeName = Utility.GetDescriptions<CharacterEnum>().Where(x => x.Key == this._characterType).Select(x => x.Value).First();
+            var weaponName = Utility.GetDescriptions<WeaponEnum>().Where(x => x.Key == weapon).Select(x => x.Value).First();
+
+            Console.WriteLine($"很抱歉 {characterTypeName} 無法使用 {weaponName}");
+            Console.WriteLine($"{this._name} 揮拳");
         }
     }
 }
