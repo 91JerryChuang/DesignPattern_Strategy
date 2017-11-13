@@ -40,7 +40,8 @@ namespace NineYi.Online
                     (input) => (WeaponEnum)Enum.Parse(typeof(WeaponEnum), input),
                     (result) => Enum.IsDefined(typeof(WeaponEnum), result));
 
-                character.Fight(weaponChoice);
+                character.SetWeapon(weaponChoice);
+                character.Fight();
 
                 Console.WriteLine($"對木人椿發動 \"{fightCount}\" 次攻擊\n");
                 fightCount++;

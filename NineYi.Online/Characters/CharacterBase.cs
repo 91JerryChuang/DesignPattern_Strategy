@@ -1,5 +1,6 @@
 ﻿using System;
 using NineYi.Online.Enums;
+using NineYi.Online.Weapons;
 
 namespace NineYi.Online.Characters
 {
@@ -11,13 +12,18 @@ namespace NineYi.Online.Characters
 
         private int _mp;
 
+        private WeaponBehavior _weapon;
+
+        protected readonly CharacterEnum _characterType;
+
         public CharacterBase(string name, CharacterEnum characterType)
         {
             this._name = name;
-            this.InitialCharacterInfo(characterType);
+            this._characterType = characterType;
+            this.InitialCharacterInfo();
         }
 
-        private void InitialCharacterInfo(CharacterEnum characterType)
+        private void InitialCharacterInfo()
         {
             var random = new Random();
             var minHp = 0;
@@ -25,7 +31,7 @@ namespace NineYi.Online.Characters
             var minMp = 0;
             var maxMp = 0;
             
-            switch(characterType)
+            switch(this._characterType)
             {
                 case CharacterEnum.Elf:
                     minHp = 25;
@@ -62,26 +68,14 @@ namespace NineYi.Online.Characters
             Console.WriteLine($"{this._name} - HP:{this._hp} - MP:{this._mp}");
         }
 
-        public void Fight(WeaponEnum weapon)
+        public void Fight()
         {
-            switch (weapon)
-            {
-                case WeaponEnum.Knife:
-                    Console.WriteLine($"{this._name} 匕首刺擊");
-                    break;
-                case WeaponEnum.Sword:
-                    Console.WriteLine($"{this._name} 揮舞長劍");
-                    break;
-                case WeaponEnum.Bow:
-                    Console.WriteLine($"{this._name} 拉弓射箭");
-                    break;
-                case WeaponEnum.Staff:
-                    Console.WriteLine($"{this._name} 揮舞魔杖");
-                    break;
-                default:
-                    Console.WriteLine($"{this._name} 揮拳");
-                    break;
-            }
+            this._weapon.UseWeapon();
+        }
+
+        public void SetWeapon(WeaponEnum weaponType)
+        {
+            this._weapon = WeaponFactory.GetWeaponBehavior(weaponType, this._characterType);
         }
     }
 }
