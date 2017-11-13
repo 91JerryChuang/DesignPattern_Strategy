@@ -43,8 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\Factories\ElfFactory.cs" />
+    <Compile Include="Characters\Factories\ICharacterFactory.cs" />
+    <Compile Include="Characters\Elf.cs" />
+    <Compile Include="Characters\Factories\KnightFactory.cs" />
+    <Compile Include="Characters\Prince.cs" />
+    <Compile Include="Characters\Knight.cs" />
+    <Compile Include="Characters\Factories\PrinceFactory.cs" />
+    <Compile Include="Enums\CharacterEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enums\WeaponEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
