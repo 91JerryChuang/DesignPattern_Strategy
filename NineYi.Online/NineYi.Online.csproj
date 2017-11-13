@@ -51,6 +51,8 @@
     <Compile Include="Characters\Prince.cs" />
     <Compile Include="Characters\Knight.cs" />
     <Compile Include="Characters\Factories\PrinceFactory.cs" />
+    <Compile Include="Characters\Wizard.cs" />
+    <Compile Include="Characters\Factories\WizardFactory.cs" />
     <Compile Include="Enums\CharacterEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

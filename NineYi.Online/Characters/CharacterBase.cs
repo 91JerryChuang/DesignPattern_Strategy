@@ -45,6 +45,12 @@ namespace NineYi.Online.Characters
                     minMp = 15;
                     maxMp = 20;
                     break;
+                case CharacterEnum.Wizard:
+                    minHp = 20;
+                    maxHp = 25;
+                    minMp = 25;
+                    maxMp = 40;
+                    break;
             }
 
             this._hp = random.Next(minHp, maxHp);
@@ -68,6 +74,9 @@ namespace NineYi.Online.Characters
                     break;
                 case WeaponEnum.Bow:
                     Console.WriteLine($"{this._name} 拉弓射箭");
+                    break;
+                case WeaponEnum.Staff:
+                    Console.WriteLine($"{this._name} 揮舞魔杖");
                     break;
                 default:
                     Console.WriteLine($"{this._name} 揮拳");

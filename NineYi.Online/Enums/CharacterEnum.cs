@@ -11,6 +11,9 @@ namespace NineYi.Online.Enums
         Knight = 1,
 
         [Description("王族")]
-        Prince = 2
+        Prince = 2,
+
+        [Description("法師")]
+        Wizard = 3
     }
 }

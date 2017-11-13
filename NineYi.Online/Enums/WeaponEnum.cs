@@ -11,6 +11,9 @@ namespace NineYi.Online
         Sword = 1,
 
         [Description("弓")]
-        Bow = 2
+        Bow = 2,
+
+        [Description("魔杖")]
+        Staff = 3
     }
 }
